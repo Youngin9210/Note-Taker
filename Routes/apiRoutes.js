@@ -9,14 +9,6 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, "../db/db.json"));
   });
 
-  // app.get("/api/notes/:id", (req, res) => {
-  //   fs.readFile("db/db.json", (err, data) => {
-  //     let notes = JSON.parse(data);
-  //     let selectedNote = req.params.id;
-  //     console.log(selectedNote);
-  //   });
-  // });
-
   app.post("/api/notes", (req, res) => {
     fs.readFile("db/db.json", (err, data) => {
       if (err) throw err;
@@ -38,9 +30,19 @@ module.exports = (app) => {
 
   app.delete("/api/notes/:id", (req, res) => {
     fs.readFile("db/db.json", (err, data) => {
+      if (err) throw err;
       let notes = JSON.parse(data);
-      let selectedNote = req.params.id;
-      console.log(selectedNote);
+      let selectedNoteID = req.params.id;
+      for (const n in notes) {
+        if (notes[n].id === selectedNoteID) {
+          console.log(notes[n]);
+          notes.splice(notes[n], 1);
+        }
+      }
+      fs.writeFile("db/db.json", JSON.stringify(notes, null, 2), (err) => {
+        if (err) throw err;
+        res.json(notes);
+      });
     });
   });
 };
