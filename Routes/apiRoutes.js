@@ -10,7 +10,9 @@ module.exports = (app) => {
       let noteJSON = JSON.parse(data);
       for (const note in noteJSON) {
         noteData.push(noteJSON[note]);
+        noteJSON[note].id = uuidv4();
       }
+      console.log(noteData);
       res.json(noteData);
     });
   });
