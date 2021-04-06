@@ -9,6 +9,14 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, "../db/db.json"));
   });
 
+  // app.get("/api/notes/:id", (req, res) => {
+  //   fs.readFile("db/db.json", (err, data) => {
+  //     let notes = JSON.parse(data);
+  //     let selectedNote = req.params.id;
+  //     console.log(selectedNote);
+  //   });
+  // });
+
   app.post("/api/notes", (req, res) => {
     fs.readFile("db/db.json", (err, data) => {
       if (err) throw err;
@@ -25,6 +33,14 @@ module.exports = (app) => {
         if (err) throw err;
         res.json(notes);
       });
+    });
+  });
+
+  app.delete("/api/notes/:id", (req, res) => {
+    fs.readFile("db/db.json", (err, data) => {
+      let notes = JSON.parse(data);
+      let selectedNote = req.params.id;
+      console.log(selectedNote);
     });
   });
 };
