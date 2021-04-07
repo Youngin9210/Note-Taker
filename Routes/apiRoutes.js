@@ -12,18 +12,18 @@ module.exports = (app) => {
   app.post("/api/notes", (req, res) => {
     fs.readFile("db/db.json", (err, data) => {
       if (err) throw err;
-      let notes = JSON.parse(data);
+      noteData = JSON.parse(data);
       let newNote = {
         title: req.body.title,
         text: req.body.text,
         id: uuidv4(),
       };
-      console.log(newNote);
-      notes.push(newNote);
+      console.log(noteData);
+      noteData.push(newNote);
 
-      fs.writeFile("db/db.json", JSON.stringify(notes, null, 2), (err) => {
+      fs.writeFile("db/db.json", JSON.stringify(noteData, null, 2), (err) => {
         if (err) throw err;
-        res.json(notes);
+        res.json(noteData);
       });
     });
   });
@@ -31,17 +31,21 @@ module.exports = (app) => {
   app.delete("/api/notes/:id", (req, res) => {
     fs.readFile("db/db.json", (err, data) => {
       if (err) throw err;
-      let notes = JSON.parse(data);
+      noteData = JSON.parse(data);
       let selectedNoteID = req.params.id;
-      for (const n in notes) {
-        if (notes[n].id === selectedNoteID) {
-          console.log(notes[n]);
-          notes.splice(notes[n], 1);
+      console.log(selectedNoteID);
+      for (const n in noteData) {
+        if (noteData[n].id === selectedNoteID) {
+          let i = noteData.indexOf(noteData[n]);
+          if (i > -1) {
+            console.log(noteData[n].id);
+            noteData.splice(i, 1);
+          }
         }
       }
-      fs.writeFile("db/db.json", JSON.stringify(notes, null, 2), (err) => {
+      fs.writeFile("db/db.json", JSON.stringify(noteData, null, 2), (err) => {
         if (err) throw err;
-        res.json(notes);
+        res.json(noteData);
       });
     });
   });
