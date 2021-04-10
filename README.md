@@ -45,8 +45,6 @@ Click on existing note to display or click to delete
 
 ![image](public/assets/images/displayNote.png)
 
-[How to video](https://drive.google.com/file/d/1AtJozsk7dj2otHj6YZWFEHWoYg4A0cN-/view)
-
 ## Installation
 
 Using the terminal, clone the repository to your local device using SSH or HTTPS. Once cloned, open repository in a text editor to make changes.
