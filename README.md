@@ -9,6 +9,8 @@ HW 11 OSU Bootcamp
 
 ## Description
 
+This application uses javascript libraries to save and retrieve data from a JSON file to create a 'note-taker'. Users can enter new notes as they please and they can delete them when necessary.
+
 #### Technologies Used
 
 - Javascript
